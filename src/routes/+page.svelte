@@ -6,36 +6,24 @@
 		console.log(selectedFile);
 	}
 
-	async function imageToBase64(file) {
-		const reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onload = () => {
-			const base64 = reader.result;
-			console.log(base64);
-			return base64;
-		};
-		reader.onerror = (error) => {
-			console.error(error);
-		};
-	}
+	const toBase64 = (file) =>
+		new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = reject;
+		});
 
 	async function handleImage() {
-		const reader = new FileReader();
-		reader.readAsDataURL(selectedFile);
-		reader.onload = async () => {
-			const base64 = reader.result;
-			console.log(base64);
-			const response = await fetch('api/image', {
-				method: 'POST',
-				body: JSON.stringify({ base64 })
-			});
+		const base64 = await toBase64(selectedFile);
+		console.log(base64);
+		const response = await fetch('api/image', {
+			method: 'POST',
+			body: JSON.stringify({ base64 })
+		});
 
-			const { success } = await response.json();
-			console.log('response', success);
-		};
-		reader.onerror = (error) => {
-			console.error(error);
-		};
+		const { success } = await response.json();
+		console.log('response', success);
 	}
 </script>
 
