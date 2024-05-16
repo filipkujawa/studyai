@@ -50,5 +50,5 @@ export async function POST({ request }) {
 		deck.push({ front: card[0], back: card[1] });
 	}
 
-	return json({ success: true, deck });
+	return json({ success: true, deck, flashcards_txt });
 }
