@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Flashcard from '$lib/Flashcard.svelte';
-	import type Card from '$lib/Flashcard.svelte';
 	type Card = {
 		front: String;
 		back: String;
@@ -13,7 +12,7 @@
 		Chat
 	}
 
-	let page: Page = Page.FileUpload;
+	let page: Page = Page.Flashcards;
 
 	let selectedFile: File;
 	let flashcards: Card[] = [
@@ -73,7 +72,12 @@
 		<span class="loading loading-spinner loading-lg"></span>
 	</div>
 {:else if page == Page.Flashcards}
-	<Flashcard bind:deck={flashcards} />
+	<div class="flex flex-col space-y-4">
+		<Flashcard bind:deck={flashcards} />
+		<div class="flex justify-center">
+			<button class="btn btn-outline btn-primary btn-md max-w-48">Chat with AI Tutor</button>
+		</div>
+	</div>
 {:else if page == Page.Chat}
 	<!---->
 {/if}

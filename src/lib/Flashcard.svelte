@@ -25,7 +25,7 @@
 	}
 </script>
 
-<div class="min-h-screen w-screen">
+<div class="min-h-3/4 w-screen">
 	<div class="flex flex-col justify-center items-center py-24">
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
